@@ -92,6 +92,7 @@ const App = () => {
     setPolea(poleaData);
     return () => {};
   }, []);
+
   useEffect(() => {
     const caja1Element = document.getElementById("caja1");
     const caja2Element = document.getElementById("caja2");
@@ -100,13 +101,13 @@ const App = () => {
     const poleaElement = document.getElementById("polea");
 
     caja1Element.style.bottom = `${base.height}px`;
-    caja1Element.style.left = `${base.width / 2 + caja1.width / 2 }px`;
+    caja1Element.style.left = `${base.width / 2 + caja1.width / 2}px`;
 
-    caja2Element.style.bottom = `${base.height / 3}px`;
+    caja2Element.style.bottom = `${base.height / 4}px`;
     caja2Element.style.left = `${base.width + 5}px`;
 
-    poleaElement.style.bottom = `${base.height + 15}px`;
-    poleaElement.style.left = `${base.width + 15}px`;
+    poleaElement.style.bottom = `${base.height + 10}px`;
+    poleaElement.style.left = `${base.width + 10}px`;
   }, [caja1, caja2, cuerda1, cuerda2, base, polea]);
 
   // guardar en estado los resultados de la normal, la fuerza de rozamiento, la aceleracion y la tension
@@ -144,9 +145,22 @@ const App = () => {
     const cuerda2Element = document.getElementById("cuerda2");
     const poleaElement = document.getElementById("polea");
 
+    cuerda1Element.style.top = `${polea.top + polea.height}px`;
+    cuerda1Element.style.left = `${caja2.left + caja2.width / 2 - 2}px`;
+
+    cuerda2Element.style.top = `${caja1.top + caja1.height / 2}px`;
+    cuerda2Element.style.left = `${caja1.left + caja1.width}px`;
+
+    const pam = polea.left - (caja1.left + caja1.width);
+    cuerda2Element.style.width = `${pam}px`;
 
 
-  }, [caja1masa, caja1]);
+    console.log(polea.top+polea.height);
+    console.log(caja2.top);
+    const pam2 = caja2.top - polea.top - polea.height;
+    cuerda1Element.style.height = `${pam2 + 5}px`;
+
+  }, [caja1masa, caja1, caja2, cuerda1, cuerda2, base, polea]);
 
   return (
     <div className={styles.App}>
@@ -239,7 +253,7 @@ const App = () => {
               id="miu"
               placeholder="Miu:"
               className={styles.input}
-              value={miu} 
+              value={miu}
               onChange={(e) => {
                 setMiu(e.target.value);
               }}
@@ -317,4 +331,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;

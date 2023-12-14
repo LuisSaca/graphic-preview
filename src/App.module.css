@@ -70,6 +70,27 @@
   border-radius: 50%;
 }
 
+/* cuerda1 */ 
+.cuerda1 {
+  height: 100px;
+  width: 4px;
+  position: absolute;
+  border: solid 1px var(--cuerda1-border-color);
+  background-color: var(--cuerda1-bg-color);
+}
+
+/* cuerda2  */
+.cuerda2 {
+  height: 4px;
+  width: 100px;
+  position: absolute;
+  border: solid 1px var(--cuerda1-border-color);
+  background-color: var(--cuerda1-bg-color);
+}
+
+
+
+
 /* toolbox */
 .toolbox {
   /* cover full window size */

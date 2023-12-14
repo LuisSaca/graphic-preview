@@ -1,13 +1,17 @@
 /* export colors */
 
 :root {
-  --graphicArea-bg-color: #f2f2f2;
+  --graphicArea-bg-color: #5c5b5b;
+  
   --caja1-bg-color: #8C0F77;
   --caja1-border-color: #8C0F77;
+
   --caja2-bg-color: #F2A365;
   --caja2-border-color: #F2A365;
+
   --polea-bg-color: #0F4C75;
   --polea-border-color: #0F4C75;
+  
   --base-bg-color: #00030D;
   --base-border-color: #00030D;
 
@@ -23,4 +27,7 @@
   --buttonRemove-text-color: #fff;
 
   --result-border-color: #00030D;
+
+  --cuerda1-bg-color: white;
+  --cuerda1-border-color: white;
 }
