@@ -1,10 +1,10 @@
 /* export colors */
 
 :root {
-  --graphicArea-bg-color: #5c5b5b;
+  --graphicArea-bg-color: #fffcee;
   
-  --caja1-bg-color: #8C0F77;
-  --caja1-border-color: #8C0F77;
+  --caja1-bg-color: #468dc7;
+  --caja1-border-color: #3a6e99;
 
   --caja2-bg-color: #F2A365;
   --caja2-border-color: #F2A365;
@@ -20,14 +20,17 @@
   --masa1-border-color: #8C0F77;
   --masa1-text-color: #00030D;
 
-  --buttonAdd-bg-color: #0F4C75;
+  --buttonAdd-bg-color: #1ece2d;
   --buttonAdd-text-color: #fff;
+  --buttonAdd-border-color: #8C0F77;
 
-  --buttonRemove-bg-color: #F2A365;
+  --buttonRemove-bg-color: #fa2d1e;
   --buttonRemove-text-color: #fff;
+  --buttonRemove-border-color: #8C0F77;
+
 
   --result-border-color: #00030D;
 
-  --cuerda1-bg-color: white;
+  --cuerda1-bg-color: rgb(187, 135, 57);
   --cuerda1-border-color: white;
 }
