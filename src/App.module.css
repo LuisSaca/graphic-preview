@@ -44,6 +44,8 @@
   align-items: center;
   /* column */
   flex-direction: column;
+  transition: all 0.5s ease;
+  border-radius: 10px 10px 0 0;
 }
 
 /* caja2 */
@@ -58,6 +60,8 @@
   align-items: center;
   /* column */
   flex-direction: column;
+  transition: all 0.5s ease;
+  border-radius: 10px 10px 0 0;
 }
 
 /* polea */
@@ -73,7 +77,7 @@
 /* cuerda1 */ 
 .cuerda1 {
   height: 100px;
-  width: 4px;
+  width: 6px;
   position: absolute;
   border: solid 1px var(--cuerda1-border-color);
   background-color: var(--cuerda1-bg-color);
@@ -81,7 +85,7 @@
 
 /* cuerda2  */
 .cuerda2 {
-  height: 4px;
+  height:6px;
   width: 100px;
   position: absolute;
   border: solid 1px var(--cuerda1-border-color);
@@ -96,6 +100,7 @@
   /* cover full window size */
   height: 100vh;
   background-color: var(--toolbox-bg-color);
+  padding: 10px;
 }
 
 .toolbox div {
@@ -126,9 +131,10 @@
   margin: 0;
 }
 /* on focus  */
-.toolbox input:focus {
+.toolbox input:hover {
   border: solid 2px var(--masa1-border-color);
   outline: none;
+  background-color: rgb(228, 228, 228);
 }
 .toolbox button {
   height: 40px;
@@ -142,13 +148,14 @@
   cursor: pointer;
   background-color: var(--buttonAdd-bg-color);
   color: var(--buttonAdd-text-color);
-  border: none;
+  border: solid 1px var(--buttonAdd-border-color);
+
 }
 .toolbox button.buttonDel {
   cursor: pointer;
   background-color: var(--buttonRemove-bg-color);
   color: var(--buttonRemove-text-color);
-  border: none;
+  border: solid 1px var(--buttonRemove-border-color);
   border-radius: 0 10px 10px 0;
 }
 .toolbox button .icon {
