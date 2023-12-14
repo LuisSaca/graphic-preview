@@ -17,5 +17,7 @@ descargan el codigo, abren la consola en el directorio y le dan a npm install pa
 Una vez instaladas las despendencias pueden correr el programa con el comando npm run dev en la consola
 
 
+
+cambios 
 ##vesiones
 0.9.1 aplicacion funcional, con pequeños detalles esteticos a mejorar
