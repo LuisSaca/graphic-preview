@@ -12,18 +12,55 @@
   width: 100vw;
   display: grid;
   grid-template-columns: 9fr 3fr;
+  /* background-color: yellow; */
+  /* image as background */
+  /* background-image: url("https://previews.123rf.com/images/tupungato/tupungato1707/tupungato170700309/82525609-ciencia-dibujo-de-fondo-textura-vector-sin-fisuras-con-los-conceptos-de-la-f%C3%ADsica.jpg"); */
+  background-image: url("./assets/img-s.jpg");
+  background-repeat: repeat;
+  background-size: auto;
 }
 
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* background blur */
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 20px 0;
+}
+.title h1 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 1rem;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+
+}
 /* area grafica */
+.graphic {
+  height: 80%;
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
 .main {
   /* cover full window size */
-  height: 100vh;
-  background-color: var(--graphicArea-bg-color);
+  height: 100%;
+  /* background-color: var(--graphicArea-bg-color); 
+  */
+  /* background blur */
+  background-color: rgba(rgba(29, 24, 24, 0.648));
+  backdrop-filter: blur(80px);
+  border-radius: 20px;
+  overflow: hidden;
 }
 /* base */
 .base {
   height: 250px;
-  width: 650px;
+  width: 450px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -46,6 +83,7 @@
   flex-direction: column;
   transition: all 0.5s ease;
   border-radius: 10px 10px 0 0;
+  color: white
 }
 
 /* caja2 */
@@ -69,31 +107,52 @@
   height: 50px;
   width: 50px;
   position: absolute;
+  top: 275px;
+  /* left important */
+  left: 490px;
   border: solid 1px var(--polea-border-color);
   background-color: var(--polea-bg-color);
   border-radius: 50%;
 }
 
-/* cuerda1 */ 
-.cuerda1 {
+.triangle {
   height: 100px;
-  width: 6px;
+  width: 50px;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid var(--polea-bg-color);
   position: absolute;
-  border: solid 1px var(--cuerda1-border-color);
+  top: 150px;
+  left: 30px;
+  /* rotate */
+  transform: rotate(45deg);
+}
+
+/* cuerda1 */
+.cuerda1 {
+  height: 120px;
+  width: 4px;
+  position: relative;
+  top: 270px;
+  left: 490px;
+  border: solid 1px var(--cuerda1-bg-color);
   background-color: var(--cuerda1-bg-color);
+  /* background-color: red; */
+  /* mandar al fondo */
+  z-index: -1;
 }
 
 /* cuerda2  */
 .cuerda2 {
-  height:6px;
-  width: 100px;
-  position: absolute;
-  border: solid 1px var(--cuerda1-border-color);
+  height: 4px;
+  width: 160px;
+  position: relative;
+  top: 145px;
+  left: 330px;
+  border: solid 1px var(--cuerda1-bg-color);
   background-color: var(--cuerda1-bg-color);
+  z-index: -1;
 }
-
-
-
 
 /* toolbox */
 .toolbox {
@@ -101,6 +160,8 @@
   height: 100vh;
   background-color: var(--toolbox-bg-color);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .toolbox div {
@@ -113,11 +174,11 @@
 .toolbox h5 {
   font-weight: 500;
   font-size: 0.8rem;
-  margin-top: .3rem;
+  margin-top: 0.3rem;
 }
 .toolbox input {
   height: 40px;
-  width: 150px;
+  width: 70%;
   border: solid 1px var(--masa1-border-color);
   color: var(--masa1-text-color);
   font-weight: 500;
@@ -149,7 +210,6 @@
   background-color: var(--buttonAdd-bg-color);
   color: var(--buttonAdd-text-color);
   border: solid 1px var(--buttonAdd-border-color);
-
 }
 .toolbox button.buttonDel {
   cursor: pointer;
@@ -181,12 +241,12 @@
 }
 .results .result h5 {
   font-weight: 600;
-  font-size: 0.8rem;
-  margin-top: .3rem;
+  font-size: 1rem;
+  margin-top: 0.3rem;
 }
 .results .result p {
-  font-weight: 500;
-  font-size: 0.8rem;
-  margin-top: .3rem;
-  margin-left: .5rem;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
 }
