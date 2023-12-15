@@ -1,72 +1,49 @@
 /* import colors */
 @import url("./styles/colors.css");
-
+/* mobile first */
 .App {
   /* max width and height */
   width: 100vw;
   height: 100vh;
+  background-color: #f2f2f2;
 }
 .hpmain {
-  /* cover full window size */
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: 9fr 3fr;
-  /* background-color: yellow; */
-  /* image as background */
-  /* background-image: url("https://previews.123rf.com/images/tupungato/tupungato1707/tupungato170700309/82525609-ciencia-dibujo-de-fondo-textura-vector-sin-fisuras-con-los-conceptos-de-la-f%C3%ADsica.jpg"); */
-  background-image: url("./assets/img-s.jpg");
-  background-repeat: repeat;
-  background-size: auto;
+  display: flex;
+  flex-direction: column;
+  
 }
-
-.title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* background blur */
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 0 0 20px 0;
-}
-.title h1 {
-  font-weight: 400;
+.hpmain .title h1 {
+  font-weight: 500;
   font-size: 1.5rem;
   margin: 1rem;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-
+  color: black;
 }
-/* area grafica */
+
 .graphic {
   height: 80%;
-  width: 80%;
-  margin: auto;
+  width: 90%;
   overflow: hidden;
   position: relative;
+  margin-left: 2.5%;
+  border: solid 1px black;
+  border-radius: 10px;
+  /* background-color: #e4e1e1; */
 }
-
 .main {
-  /* cover full window size */
-  height: 100%;
-  /* background-color: var(--graphicArea-bg-color); 
-  */
-  /* background blur */
-  background-color: rgba(rgba(29, 24, 24, 0.648));
-  backdrop-filter: blur(80px);
-  border-radius: 20px;
-  overflow: hidden;
+  width: 100%;
+  height: 33vh;
 }
 .main h3 {
-  position: relative;
-  top: 10px;
-  left: 10px;
-  color: white
+  color: black;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 /* base */
 .base {
-  height: 250px;
-  width: 450px;
+  height: 50%;
+  width: 50%;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -77,10 +54,10 @@
 
 /* caja1 */
 .caja1 {
-  height: 75px;
-  width: 120px;
+  height: 15%;
+  width: 15%;
   position: absolute;
-  border: solid 1px var(--caja1-border-color);
+  border: solid 1px var(--caja1-bg-color);
   background-color: var(--caja1-bg-color);
   display: flex;
   justify-content: center;
@@ -89,15 +66,25 @@
   flex-direction: column;
   transition: all 0.5s ease;
   border-radius: 10px 10px 0 0;
-  color: white
+  color: white;
+  z-index: 999
+}
+
+.caja1 h4 {
+  font-weight: 500;
+  font-size: .6rem;
+}
+.caja1 p {
+  font-weight: 500;
+  font-size: .6rem;
 }
 
 /* caja2 */
 .caja2 {
-  height: 120px;
-  width: 75px;
+  height: 18%;
+  width: 11%;
   position: absolute;
-  border: solid 1px var(--caja2-border-color);
+  border: solid 1px var(--caja2-bg-color);
   background-color: var(--caja2-bg-color);
   display: flex;
   justify-content: center;
@@ -106,12 +93,22 @@
   flex-direction: column;
   transition: all 0.5s ease;
   border-radius: 10px 10px 0 0;
+  z-index: 999
+}
+
+.caja2 h4 {
+  font-weight: 500;
+  font-size: .6rem;
+}
+.caja2 p {
+  font-weight: 500;
+  font-size: .6rem;
 }
 
 /* polea */
 .polea {
-  height: 50px;
-  width: 50px;
+  height: 12%;
+  width: 9%;
   position: absolute;
   /* top: 215px; */
   /* left important */
@@ -122,62 +119,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999
 }
 
+/* inner  */
 .polea .inner {
-  width: 40px;
-  height: 40px;
+  width: 85%;
+  height: 85%;
   border-radius: 50%;
   background-color: white;
 }
 
-.triangle {
-  height: 100px;
-  width: 50px;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 50px solid var(--polea-bg-color);
-  position: absolute;
-  top: 150px;
-  left: 30px;
-  /* rotate */
-  transform: rotate(45deg);
-}
+/* cuerda */
 
-/* cuerda1 */
-.cuerda1 {
-  height: 120px;
-  width: 4px;
-  position: absolute;
-  /* top: 230px;
-  left: 490px; */
-  border: solid 1px var(--cuerda1-bg-color);
-  background-color: var(--cuerda1-bg-color);
-  /* background-color: red; */
-  /* mandar al fondo */
-  z-index: -1;
-}
 
 /* cuerda2  */
-.cuerda2 {
-  height: 4px;
-  width: 160px;
-  position: absolute;
-  /* top: 90px;
-  left: 330px; */
-  border: solid 1px var(--cuerda1-bg-color);
-  background-color: var(--cuerda1-bg-color);
-  z-index: -1;
-}
+
 
 /* toolbox */
 .toolbox {
   /* cover full window size */
-  height: 100vh;
-  background-color: var(--toolbox-bg-color);
-  padding: 10px;
+  padding: 5%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .toolbox div {
@@ -225,7 +190,7 @@
 }
 .toolbox button {
   height: 40px;
-  width:  15%;
+  width: 15%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 500;
@@ -246,6 +211,7 @@
   color: var(--buttonAdd-hover-text-color);
   border: solid 1px var(--buttonAdd-hover-border-color);
 }
+
 .toolbox button.buttonDel {
   cursor: pointer;
   background-color: var(--buttonRemove-bg-color);
@@ -294,4 +260,341 @@
   font-size: 1rem;
   margin-top: 0.3rem;
   margin-left: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 700px) {
+  .App {
+    /* max width and height */
+    width: 100vw;
+    height: 100vh;
+  }
+  .hpmain {
+    /* cover full window size */
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    /* background-color: yellow; */
+    /* image as background */
+    /* background-image: url("https://previews.123rf.com/images/tupungato/tupungato1707/tupungato170700309/82525609-ciencia-dibujo-de-fondo-textura-vector-sin-fisuras-con-los-conceptos-de-la-f%C3%ADsica.jpg"); */
+    background-image: url("./assets/img-s.jpg");
+    background-repeat: repeat;
+    background-size: auto;
+  }
+
+  .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background blur */
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 20px 0;
+  }
+  .title h1 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  }
+  /* area grafica */
+  .graphic {
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    background-color: none;
+    border: none;
+  }
+
+  .main {
+    /* cover full window size */
+    height: 100%;
+    /* background-color: var(--graphicArea-bg-color); 
+  */
+    /* background blur */
+    /* background-color: rgba(rgba(29, 24, 24, 0.648)); */
+    background-color: rgba(32, 32, 49, 0.408);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .main h3 {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  }
+  /* base */
+  .base {
+    height: 250px;
+    width: 450px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: solid 1px var(--base-border-color);
+    background-color: var(--base-bg-color);
+    border-radius: 0 10px 0 0;
+  }
+
+  /* caja1 */
+  .caja1 {
+    height: 75px;
+    width: 120px;
+    position: absolute;
+    border: solid 1px var(--caja1-bg-color);
+    background-color: var(--caja1-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* column */
+    flex-direction: column;
+    transition: all 0.5s ease;
+    border-radius: 10px 10px 0 0;
+    color: white;
+  }
+  .caja1 h4 {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  .caja1 p {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  /* caja2 */
+  .caja2 {
+    height: 120px;
+    width: 75px;
+    position: absolute;
+    border: solid 1px var(--caja2-bg-color);
+    background-color: var(--caja2-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* column */
+    flex-direction: column;
+    transition: all 0.5s ease;
+    border-radius: 10px 10px 0 0;
+  }
+  .caja2 h4 {
+    font-weight: 500;
+    font-size: 1rem; 
+  }
+  .caja2 p {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  /* polea */
+  .polea {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    /* top: 215px; */
+    /* left important */
+    /* left: 490px; */
+    border: solid 1px var(--polea-border-color);
+    background-color: var(--polea-bg-color);
+    border-radius: 50% 50% 50% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .polea .inner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  .triangle {
+    height: 100px;
+    width: 50px;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid var(--polea-bg-color);
+    position: absolute;
+    top: 150px;
+    left: 30px;
+    /* rotate */
+    transform: rotate(45deg);
+  }
+
+  /* cuerda1 */
+  .cuerda1 {
+    height: 120px;
+    width: 4px;
+    position: absolute;
+    /* top: 230px;
+  left: 490px; */
+    border: solid 1px var(--cuerda1-bg-color);
+    background-color: var(--cuerda1-bg-color);
+    /* background-color: red; */
+    /* mandar al fondo */
+    z-index: -1;
+
+  }
+
+  /* cuerda2  */
+  .cuerda2 {
+    height: 4px;
+    width: 160px;
+    position: absolute;
+    /* top: 90px;
+  left: 330px; */
+    border: solid 1px var(--cuerda1-bg-color);
+    background-color: var(--cuerda1-bg-color);
+    z-index: -1;
+  }
+
+  /* toolbox */
+  .toolbox {
+    /* cover full window size */
+    height: 100vh;
+    background-color: var(--toolbox-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toolbox div {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+  .toolbox h3 {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
+  .toolbox input {
+    height: 40px;
+    border: solid 1px var(--masa1-border-color);
+    color: var(--masa1-text-color);
+    font-weight: 500;
+    padding: 0 0 0 1rem;
+    border-radius: 10px 0 0 10px;
+  }
+  .toolbox input[type="number"] {
+    height: 40px;
+    width: 70%;
+    transition: all 0.3s ease;
+  }
+  /* hide buttons up and down */
+  .toolbox input[type="number"]::-webkit-inner-spin-button,
+  .toolbox input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* on hover  */
+  .toolbox input:hover {
+    border: solid 2px var(--masa1-border-color);
+    outline: none;
+    background-color: rgb(228, 228, 228);
+  }
+  .toolbox input:focus {
+    border: solid 2px var(--masa1-border-color);
+    outline: none;
+    background-color: rgb(228, 228, 228);
+  }
+  .toolbox button {
+    height: 40px;
+    width: 15%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition background-color */
+    transition: background-color 0.2s ease;
+  }
+  .toolbox button.buttonAdd {
+    cursor: pointer;
+    background-color: var(--buttonAdd-bg-color);
+    color: var(--buttonAdd-text-color);
+    border: solid 1px var(--buttonAdd-border-color);
+  }
+  .toolbox button.buttonAdd:hover {
+    background-color: var(--buttonAdd-hover-bg-color);
+    color: var(--buttonAdd-hover-text-color);
+    border: solid 1px var(--buttonAdd-hover-border-color);
+  }
+  .toolbox button.buttonDel {
+    cursor: pointer;
+    background-color: var(--buttonRemove-bg-color);
+    color: var(--buttonRemove-text-color);
+    border: solid 1px var(--buttonRemove-border-color);
+    border-radius: 0 10px 10px 0;
+  }
+  .toolbox button.buttonDel:hover {
+    background-color: var(--buttonRemove-hover-bg-color);
+    color: var(--buttonRemove-hover-text-color);
+    border: solid 1px var(--buttonRemove-hover-border-color);
+  }
+  .toolbox button .icon {
+    font-size: 1.2rem;
+  }
+
+  .results {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .results h3 {
+    text-align: left;
+    width: 100%;
+  }
+  .results .result {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0.5rem;
+    /* line at bottom */
+    /* border-bottom: solid 1px var(--result-border-color); */
+  }
+  .results h3 {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-top: 0.3rem;
+  }
+  .results .result h5 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
+  .results .result p {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    margin-left: 0.5rem;
+  }
 }

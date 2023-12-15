@@ -170,9 +170,7 @@ const App = () => {
               <p>{elements[1].masa} kg</p>
             </div>
             <div className={styles.polea} id="polea">
-              {/* inner circle */}
               <div className={styles.inner}></div>
-              {/* outer circle */}
             </div>
             <div className={styles.base} id="base"></div>
             <div className={styles.cuerda1} id="cuerda1"></div>
