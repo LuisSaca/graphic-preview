@@ -2,8 +2,18 @@ import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import { IoAddCircleOutline, IoTrashBinOutline } from "react-icons/io5";
 import { GrPowerReset } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateElements,
+  updateMiu,
+  updateG,
+  updateResults,
+} from "./app/slices/Elements.slice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const elements = useSelector((state) => state.elements.elements);
+  const results = useSelector((state) => state.elements.results);
   const [caja1, setCaja1] = useState({
     bottom: 0,
     height: 0,
@@ -66,10 +76,12 @@ const App = () => {
     x: 0,
     y: 0,
   });
-  const [caja1masa, setCaja1masa] = useState(50);
-  const [caja2masa, setCaja2masa] = useState(40);
-  const [miu, setMiu] = useState(0.5);
-  const [gravedad, setGravedad] = useState(9.8);
+  const [resultados, setResultados] = useState({
+    normal: 0,
+    fr: 0,
+    aceleracion: 0,
+    tension: 0,
+  });
 
   useEffect(() => {
     const caja1Element = document.getElementById("caja1");
@@ -99,69 +111,44 @@ const App = () => {
     const cuerda1Element = document.getElementById("cuerda1");
     const cuerda2Element = document.getElementById("cuerda2");
     const poleaElement = document.getElementById("polea");
-    // triangulo
-    // const triangleElement = document.querySelector(".triangle");
-    // triangleElement.style.left = `${caja1.width + 5}px`;
-
     caja1Element.style.bottom = `${base.height}px`;
     caja1Element.style.left = `${base.width / 2}px`;
-
     caja2Element.style.bottom = `${base.height / 4}px`;
     caja2Element.style.left = `${base.width + 5}px`;
-
-    // poleaElement.style.bottom = `${base.height + 10}px`;
-    poleaElement.style.left = `${base.width + 5}px`;
+    poleaElement.style.bottom = `${base.height + 3}px`;
+    poleaElement.style.left = `${base.width + 3}px`;
+    cuerda1Element.style.bottom = `${base.height - caja2.height + 10}px`;
+    cuerda1Element.style.left = `${base.width + 10 + 30}px`;
+    cuerda2Element.style.bottom = `${base.height + caja1.height / 2}px`;
+    cuerda2Element.style.left = `${base.width - caja1.width}px`;
   }, [caja1, caja2, cuerda1, cuerda2, base, polea]);
 
-  // guardar en estado los resultados de la normal, la fuerza de rozamiento, la aceleracion y la tension
-  const [normal, setNormal] = useState(0);
-  const [fr, setFr] = useState(0);
-  const [aceleracion, setAceleracion] = useState(0);
-  const [tension, setTension] = useState(0);
-
-  // hacer calculos para calcular la aceleracion, la fuerza de rozamiento y la tension
   useEffect(() => {
-    let masa1 = caja1masa;
-    let masa2 = caja2masa;
-    let normal = masa1 * gravedad;
+    console.log(results);
+    let masa = parseFloat(elements[0].masa);
+    let g = parseFloat(elements[0].g);
+    let masa2 = parseFloat(elements[1].masa);
+    let miu = parseFloat(elements[0].miu);
+    let normal = masa * g;
     let fr = miu * normal;
-    let aceleracion = (fr - masa2 * gravedad) / (masa1 - masa2);
-    let tension = fr - (masa1 * (fr - masa2 * gravedad)) / (masa1 - masa2);
-    // redondear con 2 decimales la aceleracion y la tension
-    aceleracion = aceleracion.toFixed(2);
-    tension = tension.toFixed(2);
-    normal = normal.toFixed(2);
-    fr = fr.toFixed(2);
-    setNormal(normal);
-    setFr(fr);
-    setAceleracion(aceleracion);
-    setTension(tension);
+    let aceleracion = (masa2 * g - fr) / (masa + masa2);
+    let tension = masa * ((masa2 * g - fr) / (masa + masa2)) + fr;
+    if (isNaN(normal)) normal = 0;
+    if (isNaN(fr)) fr = 0;
+    if (isNaN(aceleracion)) aceleracion = 0;
+    if (isNaN(tension)) tension = 0;
+    if (aceleracion < 0) aceleracion = 0;
+    setResultados({
+      normal: normal.toFixed(2),
+      fr: fr.toFixed(2),
+      aceleracion: aceleracion.toFixed(2),
+      tension: tension.toFixed(2),
+    });
+  }, [elements, results]);
 
-    return () => {};
-  }, [caja1masa, caja2masa, miu, gravedad]);
-
-  // hacer cambios en interfaz segun los resultados
-  // useEffect(() => {
-  //   const caja1Element = document.getElementById("caja1");
-  //   const caja2Element = document.getElementById("caja2");
-  //   const cuerda1Element = document.getElementById("cuerda1");
-  //   const cuerda2Element = document.getElementById("cuerda2");
-  //   const poleaElement = document.getElementById("polea");
-
-  //   // cuerda1Element.style.top = `${polea.top + polea.height}px`;
-  //   // cuerda1Element.style.left = `${caja2.left + caja2.width / 2 - 2}px`;
-
-  //   // cuerda2Element.style.top = `${caja1.top + caja1.height / 2}px`;
-  //   // cuerda2Element.style.left = `${caja1.left + caja1.width}px`;
-
-  //   // const pam = polea.left - (caja1.left + caja1.width);
-  //   // cuerda2Element.style.width = `${pam}px`;
-
-  //   // console.log(polea.top+polea.height);
-  //   // console.log(caja2.top);
-  //   // const pam2 = caja2.top - polea.top - polea.height;
-  //   // cuerda1Element.style.height = `${pam2 + 5}px`;
-  // }, [caja1masa, caja1, caja2, cuerda1, cuerda2, base, polea]);
+  useEffect(() => {
+    dispatch(updateResults(resultados));
+  }, [resultados, dispatch]);
 
   return (
     <div className={styles.App}>
@@ -169,172 +156,171 @@ const App = () => {
         {/* area grafica */}
         <div className={styles.triangle}></div>
         <div className={styles.title}>
-          <h1>Fisica - Estatica de la particula</h1>
+          <h1>Fisica - Dinámica de la particula</h1>
         </div>
         <div className={styles.graphic}>
-          {/* titulo: FISICA */}
           <div className={styles.main}>
-            <h3>Area Grafica</h3>
-            {/* triangulo */}
-            {/* cajas */}
+            <h3>Area Gráfica</h3>
             <div className={styles.caja1} id="caja1">
               <h4>Masa 1</h4>
-              <p>{caja1masa} kg</p>
+              <p>{elements[0].masa} kg</p>
             </div>
             <div className={styles.caja2} id="caja2">
               <h4>Masa 2</h4>
-              <p>{caja2masa} kg</p>
+              <p>{elements[1].masa} kg</p>
             </div>
-            <div className={styles.polea} id="polea"></div>
+            <div className={styles.polea} id="polea">
+              {/* inner circle */}
+              <div className={styles.inner}></div>
+              {/* outer circle */}
+            </div>
             <div className={styles.base} id="base"></div>
             <div className={styles.cuerda1} id="cuerda1"></div>
             <div className={styles.cuerda2} id="cuerda2"></div>
           </div>
         </div>
-
-        {/* 1025 651 */}
-        {/* herramientas */}
         <div className={styles.toolbox}>
-          <h3>Herramientas</h3>
-          <h5>Masa 1</h5>
-          <div className={styles.masa1}>
-            <input
-              type="number"
-              name="masa"
-              id="masa"
-              placeholder="Masa:"
-              onChange={(e) => {
-                setCaja1masa(e.target.value);
-              }}
-              className={styles.input}
-              value={caja1masa}
-            />
-            <button
-              onClick={() => {
-                setCaja1masa(caja1masa);
-              }}
-              className={styles.buttonAdd}
-            >
-              <IoAddCircleOutline className={styles.icon} />
-            </button>
-            <button
-              onClick={() => {
-                setCaja1masa(0);
-              }}
-              className={styles.buttonDel}
-            >
-              <IoTrashBinOutline className={styles.icon} />
-            </button>
-          </div>
-          <h5>Masa 2</h5>
-          <div className={styles.masa2}>
-            <input
-              type="number"
-              name="masa"
-              id="masa"
-              placeholder="Masa:"
-              onChange={(e) => {
-                setCaja2masa(e.target.value);
-              }}
-              className={styles.masa2input}
-              value={caja2masa}
-            />
-            <button
-              onClick={() => {
-                setCaja2({ ...caja2, masa: caja1masa });
-              }}
-              className={styles.buttonAdd}
-            >
-              <IoAddCircleOutline className={styles.icon} />
-            </button>
-            <button
-              onClick={() => {
-                setCaja2masa(0);
-              }}
-              className={styles.buttonDel}
-            >
-              <IoTrashBinOutline className={styles.icon} />
-            </button>
-          </div>
-          <h5>Miu</h5>
-          <div className={styles.miu}>
-            <input
-              type="number"
-              name="miu"
-              id="miu"
-              placeholder="Miu:"
-              className={styles.input}
-              value={miu}
-              onChange={(e) => {
-                setMiu(e.target.value);
-              }}
-            />
-            <button className={styles.buttonAdd}>
-              <IoAddCircleOutline
-                className={styles.icon}
-                onClick={() => {
-                  setMiu(miu);
+          <form>
+            <h3>Masa 1:</h3>
+            <div>
+              <input
+                type="number"
+                name="name"
+                id="0"
+                value={elements[0].masa}
+                onChange={(e) => {
+                  e.preventDefault();
+                  dispatch(updateElements({ id: 0, masa: e.target.value }));
                 }}
               />
-            </button>
-            <button className={styles.buttonDel}>
-              <IoTrashBinOutline
-                className={styles.icon}
-                onClick={() => {
-                  setMiu(0.5);
+              <button className={styles.buttonAdd}>
+                <IoAddCircleOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                />
+              </button>
+              <button className={styles.buttonDel}>
+                <IoTrashBinOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(updateElements({ id: 0, masa: 0 }));
+                  }}
+                />
+              </button>
+            </div>
+          </form>
+          <form>
+            <h3>Masa 2:</h3>
+            <div>
+              <input
+                type="number"
+                name="name"
+                value={elements[1].masa}
+                onChange={(e) => {
+                  dispatch(updateElements({ id: 1, masa: e.target.value }));
                 }}
               />
-            </button>
-          </div>
-          <h5>Gravedad</h5>
-          <div className={styles.gravedad}>
-            <input
-              type="number"
-              name="gravedad"
-              id="gravedad"
-              placeholder="Gravedad:"
-              className={styles.input}
-              value={gravedad}
-              onChange={(e) => {
-                setGravedad(e.target.value);
-              }}
-            />
-            <button className={styles.buttonAdd}>
-              <IoAddCircleOutline
-                className={styles.icon}
-                onClick={() => {
-                  setGravedad(gravedad);
+              <button className={styles.buttonAdd}>
+                <IoAddCircleOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                />
+              </button>
+              <button className={styles.buttonDel}>
+                <IoTrashBinOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(updateElements({ id: 1, masa: 0 }));
+                  }}
+                />
+              </button>
+            </div>
+          </form>
+          <form>
+            <h3>Coeficiente de rozamiento (μ):</h3>
+            <div>
+              <input
+                type="number"
+                name="name"
+                value={elements[0].miu}
+                onChange={(e) => {
+                  e.preventDefault();
+                  dispatch(updateMiu({ id: 0, miu: e.target.value }));
                 }}
               />
-            </button>
-            <button className={styles.buttonDel}>
-              <GrPowerReset
-                className={styles.icon}
-                onClick={() => {
-                  setGravedad(9.8);
+              <button className={styles.buttonAdd}>
+                <IoAddCircleOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                />
+              </button>
+              <button className={styles.buttonDel}>
+                <IoTrashBinOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(updateMiu({ id: 0, miu: 0 }));
+                  }}
+                />
+              </button>
+            </div>
+          </form>
+          <form>
+            <h3>Gravedad (g):</h3>
+            <div>
+              <input
+                type="number"
+                name="name"
+                value={elements[0].g}
+                onChange={(e) => {
+                  e.preventDefault();
+                  dispatch(updateG({ id: 0, g: e.target.value }));
                 }}
               />
-            </button>
-          </div>
-
-          {/* resultados */}
+              <button className={styles.buttonAdd}>
+                <IoAddCircleOutline
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                />
+              </button>
+              <button className={styles.buttonDel}>
+                <GrPowerReset
+                  className={styles.icon}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(updateG({ id: 0, g: 9.8 }));
+                  }}
+                />
+              </button>
+            </div>
+          </form>
           <div className={styles.results}>
-            <h3>Resultados</h3>
+            <h3>Resultados: </h3>
             <div className={styles.result}>
               <h5>Normal: </h5>
-              <p>{normal} N</p>
+              <p>{results[0].normal} N</p>
             </div>
             <div className={styles.result}>
               <h5>Fuerza de Rozamiento: </h5>
-              <p>{fr} N</p>
+              <p>{results[0].fr} N</p>
             </div>
             <div className={styles.result}>
               <h5>Aceleracion: </h5>
-              <p>{aceleracion} m/s²</p>
+              <p>{results[0].aceleracion} m/s²</p>
             </div>
             <div className={styles.result}>
               <h5>Tension: </h5>
-              <p>{tension} N</p>
+              <p>{results[0].tension} N</p>
             </div>
           </div>
         </div>

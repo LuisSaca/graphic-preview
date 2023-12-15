@@ -57,6 +57,12 @@
   border-radius: 20px;
   overflow: hidden;
 }
+.main h3 {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  color: white
+}
 /* base */
 .base {
   height: 250px;
@@ -107,12 +113,22 @@
   height: 50px;
   width: 50px;
   position: absolute;
-  top: 275px;
+  /* top: 215px; */
   /* left important */
-  left: 490px;
+  /* left: 490px; */
   border: solid 1px var(--polea-border-color);
   background-color: var(--polea-bg-color);
+  border-radius: 50% 50% 50% 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.polea .inner {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  background-color: white;
 }
 
 .triangle {
@@ -132,9 +148,9 @@
 .cuerda1 {
   height: 120px;
   width: 4px;
-  position: relative;
-  top: 270px;
-  left: 490px;
+  position: absolute;
+  /* top: 230px;
+  left: 490px; */
   border: solid 1px var(--cuerda1-bg-color);
   background-color: var(--cuerda1-bg-color);
   /* background-color: red; */
@@ -146,9 +162,9 @@
 .cuerda2 {
   height: 4px;
   width: 160px;
-  position: relative;
-  top: 145px;
-  left: 330px;
+  position: absolute;
+  /* top: 90px;
+  left: 330px; */
   border: solid 1px var(--cuerda1-bg-color);
   background-color: var(--cuerda1-bg-color);
   z-index: -1;
@@ -171,19 +187,23 @@
   justify-content: left;
   align-items: center;
 }
-.toolbox h5 {
+.toolbox h3 {
   font-weight: 500;
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-top: 0.3rem;
 }
 .toolbox input {
   height: 40px;
-  width: 70%;
   border: solid 1px var(--masa1-border-color);
   color: var(--masa1-text-color);
   font-weight: 500;
   padding: 0 0 0 1rem;
   border-radius: 10px 0 0 10px;
+}
+.toolbox input[type="number"] {
+  height: 40px;
+  width: 70%;
+  transition: all 0.3s ease;
 }
 /* hide buttons up and down */
 .toolbox input[type="number"]::-webkit-inner-spin-button,
@@ -191,19 +211,29 @@
   -webkit-appearance: none;
   margin: 0;
 }
-/* on focus  */
+
+/* on hover  */
 .toolbox input:hover {
+  border: solid 2px var(--masa1-border-color);
+  outline: none;
+  background-color: rgb(228, 228, 228);
+}
+.toolbox input:focus {
   border: solid 2px var(--masa1-border-color);
   outline: none;
   background-color: rgb(228, 228, 228);
 }
 .toolbox button {
   height: 40px;
-  width: 40px;
+  width:  15%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* transition background-color */
+  transition: background-color 0.2s ease;
 }
 .toolbox button.buttonAdd {
   cursor: pointer;
@@ -211,12 +241,22 @@
   color: var(--buttonAdd-text-color);
   border: solid 1px var(--buttonAdd-border-color);
 }
+.toolbox button.buttonAdd:hover {
+  background-color: var(--buttonAdd-hover-bg-color);
+  color: var(--buttonAdd-hover-text-color);
+  border: solid 1px var(--buttonAdd-hover-border-color);
+}
 .toolbox button.buttonDel {
   cursor: pointer;
   background-color: var(--buttonRemove-bg-color);
   color: var(--buttonRemove-text-color);
   border: solid 1px var(--buttonRemove-border-color);
   border-radius: 0 10px 10px 0;
+}
+.toolbox button.buttonDel:hover {
+  background-color: var(--buttonRemove-hover-bg-color);
+  color: var(--buttonRemove-hover-text-color);
+  border: solid 1px var(--buttonRemove-hover-border-color);
 }
 .toolbox button .icon {
   font-size: 1.2rem;
@@ -238,6 +278,11 @@
   margin-top: 0.5rem;
   /* line at bottom */
   /* border-bottom: solid 1px var(--result-border-color); */
+}
+.results h3 {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
 }
 .results .result h5 {
   font-weight: 600;
